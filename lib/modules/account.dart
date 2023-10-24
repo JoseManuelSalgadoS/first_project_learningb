@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:first_project_learningb/kernel/colors/colors_app.dart';
+
 
 class Account extends StatelessWidget {
   const Account({super.key});
@@ -7,6 +9,7 @@ class Account extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cuenta'),
+        backgroundColor: ColorsApp.primaryColor,
       ),
       body: Center(
         child: Column(

@@ -1,22 +1,22 @@
 import 'package:first_project_learningb/kernel/validations/validations.dart';
 import 'package:first_project_learningb/modules/account.dart';
-import 'package:first_project_learningb/modules/forms/adapters/screens/register_form.dart';
 import 'package:flutter/material.dart';
 
-class FirstForm extends StatefulWidget {
-  const FirstForm({super.key});
+class RegisterForm extends StatefulWidget {
+  const RegisterForm({super.key});
 
   @override
-  State<FirstForm> createState() => _FirstFormState();
+  State<RegisterForm> createState() => _RegisterFormState();
 }
 
-class _FirstFormState extends State<FirstForm> {
+class _RegisterFormState extends State<RegisterForm> {
   final _formkey = GlobalKey<FormState>();
   bool _isButtonDisabled = true;
   final TextEditingController _fullname = TextEditingController(text: '');
   final TextEditingController _age = TextEditingController(text: '');
   final TextEditingController _email = TextEditingController(text: '');
   final TextEditingController _password = TextEditingController(text: '');
+  final TextEditingController _passwordRepeated = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
@@ -41,23 +41,6 @@ class _FirstFormState extends State<FirstForm> {
                       height: 200,
                     ),
                   ),
-                  // Container(
-                  //   margin: const EdgeInsets.only(bottom: 16),
-                  //   child: TextFormField(
-                  //     decoration: const InputDecoration(
-                  //         labelText: 'Nombre Completo',
-                  //         hintText: 'José Manuel Salgado Salgado'),
-                  //     validator: (value) {
-                  //       if (value!.isEmpty) {
-                  //         return 'Campo Obligatorio';
-                  //       } else {
-                  //         return null;
-                  //       }
-                  //     },
-                  //     keyboardType: TextInputType.name,
-                  //     controller: _fullname,
-                  //   ),
-                  // ),
                   Container(
                     margin: const EdgeInsets.only(bottom: 16),
                     child: TextFormField(
@@ -80,9 +63,7 @@ class _FirstFormState extends State<FirstForm> {
                     margin: const EdgeInsets.only(bottom: 16),
                     child: TextFormField(
                       decoration:
-                          const InputDecoration(
-                            labelText: 'Contraseña',),
-                          
+                          const InputDecoration(labelText: 'Contraseña'),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Campo Obligatorio';
@@ -94,38 +75,24 @@ class _FirstFormState extends State<FirstForm> {
                       controller: _password,
                     ),
                   ),
-                  // Container(
-                  //   margin: const EdgeInsets.only(bottom: 16),
-                  //   child: TextFormField(
-                  //     decoration: const InputDecoration(
-                  //         labelText: 'Repite la Contraseña'),
-                  //     validator: (value) {
-                  //       if (value!.isEmpty) {
-                  //         return 'Campo Obligatorio';
-                  //       } else {
-                  //         return null;
-                  //       }
-                  //     },
-                  //     keyboardType: TextInputType.visiblePassword,
-                  //     controller: _password,
-                  //   ),
-                  // ),
-                  // Container(
-                  //   margin: const EdgeInsets.only(bottom: 16),
-                  //   child: TextFormField(
-                  //     decoration: const InputDecoration(
-                  //         labelText: 'Edad', hintText: '22'),
-                  //     validator: (value) {
-                  //       if (value!.isEmpty) {
-                  //         return 'Campo Obligatorio';
-                  //       } else {
-                  //         return null;
-                  //       }
-                  //     },
-                  //     keyboardType: TextInputType.number,
-                  //     controller: _age,
-                  //   ),
-                  // ),
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                          labelText: 'Repite la Contraseña'),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Campo Obligatorio';
+                        } else if (value != _password.text){
+                          return 'Las contraseñas no coinciden :c';
+                        }else{
+                          return null;
+                        }
+                      },
+                      keyboardType: TextInputType.visiblePassword,
+                      controller: _passwordRepeated,
+                    ),
+                  ),
                   Container(
                     padding: const EdgeInsets.all(16),
                     child: ElevatedButton(
@@ -139,21 +106,18 @@ class _FirstFormState extends State<FirstForm> {
                                   return Account();
                                 }));
                               },
-                        child: const Text('Iniciar Sesión')),
+                        child: const Text('Registrarse')),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                          MaterialPageRoute(builder: (context){
-                            return RegisterForm();
-                          })
-                        );
-                      },
-                      child: const Text('¿No tienes una cuenta?'),
-                    ),
-                  )
+                  // Container(
+                  //   padding: const EdgeInsets.all(16),
+                  //   child: TextButton(
+                  //     onPressed: () {
+                  //       // Aquí debes agregar la navegación a la otra vista
+                  //       // Por ejemplo, Navigator.push para ir a la otra vista.
+                  //     },
+                  //     child: const Text('¿No tienes una cuenta?'),
+                  //   ),
+                  // )
                 ]),
               )),
         ),
